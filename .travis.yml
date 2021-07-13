@@ -1,26 +1,20 @@
 language: generic
 
-#Tell travis we need docker
 services:
   - docker
 
-#Tell travis how to deploy code in AWS
 deploy:
-  provider: elasticbeanstalk #We will deploy code to elastic bean stalk
-  region: ap-south-1 #Specify the region
-  app: "my-first-app" #Copy it from elasticbeanstalk dashboard
-  env: "Myfirstapp-env" #Copy it from elasticbeanstalk dashboard
+  provider: elasticbeanstalk
+  region: ap-south-1
+  app: "my-first-app"
+  env: "Myfirstapp-env"
 
-#Access key id and secret access key as configured in IAM of AWS.
-  access_key_id: $AWS_ACCESS_KEY #this variable name should be same as in tarvis 
-  secret_access_key: $AWS_SECRET_KEY #this variable name should be same as in tarvis 
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
 
-#Elastic bean stalk will take the code from S3 bucket and deploy in container.
-#Name of the S3 bucket in aws
   bucket_name: "my-first-app-bucket"
 
-#Folder where travis ci will upload the code in zip file .Take it from AWS S3
   bucket_path: "docker"
+
   on:
-    #Deploy only when there are changes are in main branch
     branch: main
